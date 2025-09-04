@@ -1,3 +1,6 @@
+using Prog7312_MunicipalityApp_ST10299399.Repositories;
+using Prog7312_MunicipalityApp_ST10299399.Services;
+
 namespace Prog7312_MunicipalityApp_ST10299399
 {
     public class Program
@@ -8,6 +11,9 @@ namespace Prog7312_MunicipalityApp_ST10299399
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+            builder.Services.AddSingleton<IIssueRepository, IssueRepository>();
+            builder.Services.AddScoped<IIssueService, IssueService>();
+
 
             var app = builder.Build();
 
