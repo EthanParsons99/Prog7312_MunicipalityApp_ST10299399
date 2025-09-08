@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Prog7312_MunicipalityApp_ST10299399.Models;
 using Prog7312_MunicipalityApp_ST10299399.Services;
 using Microsoft.AspNetCore.Hosting;
+using Prog7312_MunicipalityApp_ST10299399.ViewModels;
 
 namespace Prog7312_MunicipalityApp_ST10299399.Controllers
 {
@@ -12,9 +13,10 @@ namespace Prog7312_MunicipalityApp_ST10299399.Controllers
         private readonly IIssueService _issueService;
         private readonly IWebHostEnvironment _webHostEnvironment;
 
-        public HomeController(IIssueService issueService)
+        public HomeController(IIssueService issueService, IWebHostEnvironment webHostEnvironment)
         {
             _issueService = issueService;
+            _webHostEnvironment = webHostEnvironment;
         }
 
         public IActionResult Index()
@@ -24,38 +26,45 @@ namespace Prog7312_MunicipalityApp_ST10299399.Controllers
 
         public IActionResult ReportIssue()
         {
-            return View(new Issue());
+            return View(new ReportIssueViewModel());
         }
 
         [HttpPost]
-        public IActionResult ReportIssue(Issue issue, IFormFile file)
+        public IActionResult ReportIssue(ReportIssueViewModel viewModel)
         {
             if (ModelState.IsValid)
             {
-                if (file != null && file.Length > 0)
+               var issue = new Issue
                 {
-                    var uniqueFileName = Guid.NewGuid().ToString() + "_" + file.FileName;
+                    issueType = viewModel.issueType,
+                    issueDescription = viewModel.issueDescription,
+                    issueLocation = viewModel.issueLocation,
+                    //issueStatus = IssueStatus.Reported.ToString(),
+                    //issueDate = DateTime.Now
+                };
 
-                    var uploadsFolder = Path.Combine(_webHostEnvironment.WebRootPath, "uploads");
-                    var filePath = Path.Combine(uploadsFolder, uniqueFileName);
+                if (viewModel.issueImage != null && viewModel.issueImage.Length > 0)
+                {
+                   var uniqueFileName = Guid.NewGuid().ToString() + "_" + viewModel.issueImage.FileName;
+                     var uploads = Path.Combine(_webHostEnvironment.WebRootPath, "uploads");
+                    var filePath = Path.Combine(uploads, uniqueFileName);
+                    Directory.CreateDirectory(uploads); // Ensure the directory exists
 
-                    Directory.CreateDirectory(uploadsFolder);
 
                     using (var fileStream = new FileStream(filePath, FileMode.Create))
                     {
-                        file.CopyTo(fileStream);
+                        viewModel.issueImage.CopyTo(fileStream);
                     }
-
                     issue.issueImage = "/uploads/" + uniqueFileName;
                 }
 
                 _issueService.ReportNewIssue(issue);
-
                 TempData["SuccessMessage"] = "Issue reported successfully!";
 
-                return RedirectToAction("AllIssues");
+                return RedirectToAction("Index");
+
             }
-            return View(issue);
+            return View(viewModel);
         }
 
         public IActionResult AllIssues()

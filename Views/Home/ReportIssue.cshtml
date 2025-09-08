@@ -1,4 +1,4 @@
-﻿@model Prog7312_MunicipalityApp_ST10299399.Models.Issue
+﻿@model Prog7312_MunicipalityApp_ST10299399.ViewModels.ReportIssueViewModel
 
 @{
     ViewData["Title"] = "Report an Issue";
@@ -35,8 +35,9 @@
     </div>
 
     <div class="form-group mb-3">
-        <label asp-for="issueImage" class="form-label>">Upload Image (optional)</label>
-        <input type="file" name="file" class="form-control" />
+        <label class="form-label">Upload Image (optional)</label>
+        <input asp-for="issueImage" type="file" class="form-control" />
+        <span asp-validation-for="issueImage" class="text-danger"></span>
     </div>
 
     <button type="submit" class="btn btn-primary mt-3">Submit Issue</button>

@@ -15,7 +15,7 @@ namespace Prog7312_MunicipalityApp_ST10299399.Models
 
         public string issueLocation { get; set; }
 
-        public string issueImage { get; set; }
+        public string? issueImage { get; set; }
 
         public DateTime issueDate { get; set; }
     }
