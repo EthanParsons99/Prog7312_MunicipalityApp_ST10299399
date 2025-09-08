@@ -13,7 +13,7 @@ namespace Prog7312_MunicipalityApp_ST10299399
             builder.Services.AddControllersWithViews();
             builder.Services.AddSingleton<IIssueRepository, IssueRepository>();
             builder.Services.AddScoped<IIssueService, IssueService>();
-
+            builder.Services.AddSingleton<IWebHostEnvironment, IWebHostEnvironment>();
 
             var app = builder.Build();
 

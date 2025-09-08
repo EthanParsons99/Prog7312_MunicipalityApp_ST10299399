@@ -11,7 +11,14 @@
 
     <div class="form-group mb-3">
         <label asp-for="issueType" class="form-label"> Issue Type</label>
-        <input asp-for="issueType" class="form-control" />
+       <select asp-for="issueType" class="form-select">
+            <option value="">-- Select Issue Type --</option>
+            <option value="Pothole">Pothole</option>
+            <option value="Streetlight">Streetlight</option>
+            <option value="Garbage">Garbage</option>
+            <option value="Water Leak">Water Leak</option>
+            <option value="Other">Other</option>
+        </select>
         <span asp-validation-for="issueType" class="text-danger"></span>
     </div>
 
@@ -30,7 +37,6 @@
     <div class="form-group mb-3">
         <label asp-for="issueImage" class="form-label>">Upload Image (optional)</label>
         <input type="file" name="file" class="form-control" />
-        <span asp-validation-for="issueImage" class="text-danger"></span>
     </div>
 
     <button type="submit" class="btn btn-primary mt-3">Submit Issue</button>
