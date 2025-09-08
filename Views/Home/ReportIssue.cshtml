@@ -1,5 +1,44 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model Prog7312_MunicipalityApp_ST10299399.Models.Issue
+
 @{
+    ViewData["Title"] = "Report an Issue";
+}
+
+<h1>Report a new issue</h1>
+
+<form asp-action="ReportIssue" method="post" enctype="multipart/form-data" class="mt-4">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <div class="form-group mb-3">
+        <label asp-for="issueType" class="form-label"> Issue Type</label>
+        <input asp-for="issueType" class="form-control" />
+        <span asp-validation-for="issueType" class="text-danger"></span>
+    </div>
+
+    <div class="form-group mb-3">
+        <label asp-for="issueDescription" class="form-label">Description</label>
+        <textarea asp-for="issueDescription" class="form-control" rows="4"></textarea>
+        <span asp-validation-for="issueDescription" class="text-danger"></span>
+    </div>
+
+    <div class="form-group mb-3">
+        <label asp-for="issueLocation" class="form-label">Location</label>
+        <input asp-for="issueLocation" class="form-control" />
+        <span asp-validation-for="issueLocation" class="text-danger"></span>
+    </div>
+
+    <div class="form-group mb-3">
+        <label asp-for="issueImage" class="form-label>">Upload Image (optional)</label>
+        <input type="file" name="file" class="form-control" />
+        <span asp-validation-for="issueImage" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary mt-3">Submit Issue</button>
+
+</form>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }
