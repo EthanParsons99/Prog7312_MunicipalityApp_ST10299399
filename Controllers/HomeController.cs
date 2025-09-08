@@ -1,16 +1,18 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using Prog7312_MunicipalityApp_ST10299399.Models;
+using Prog7312_MunicipalityApp_ST10299399.Services;
 
 namespace Prog7312_MunicipalityApp_ST10299399.Controllers
 {
+    // Handles main application logic
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly IIssueService _issueService;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(IIssueService issueService)
         {
-            _logger = logger;
+            _issueService = issueService;
         }
 
         public IActionResult Index()
@@ -18,15 +20,26 @@ namespace Prog7312_MunicipalityApp_ST10299399.Controllers
             return View();
         }
 
-        public IActionResult Privacy()
+        public IActionResult ReportIssue()
         {
-            return View();
+            return View(new Issue());
         }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
+        [HttpPost]
+        public IActionResult ReportIssue(Issue issue)
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            if (ModelState.IsValid)
+            {
+                _issueService.ReportNewIssue(issue);
+                return RedirectToAction("AllIssues");
+            }
+            return View(issue);
+        }
+
+        public IActionResult AllIssues()
+        {
+            var allIssues = _issueService.GetAllIssues();
+            return View(allIssues);
         }
     }
 }

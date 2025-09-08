@@ -2,7 +2,44 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="text-center mt-5">
+    <h1 class="display-4 mb-4">Welcome</h1>
+    <p class="lead">This is a sample ASP.NET Core application.</p>
+</div>
+
+
+<div class="row text-center mt-5">
+    <div class="col-md-4 mb-4">
+        <div class="card h-100 shadow-sm border-primary">
+            <div class="card-body">
+                <i class="bi bi-file-earmark-plus display-1 text-primary"></i> <h5 class="card-title mt-3">Report an Issue</h5>
+                <p class="card-text">Found a bug or have a feature request? Let us know!</p>
+                <a href="@Url.Action("ReportIssue", "Home")" class="btn btn-primary mt-auto">Report Issue</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="col-md-4 mb-4">
+    <div class="card h-100 shadow-sm border-success">
+        <div class="card-body">
+            <i class="bi bi-list-check display-1 text-success"></i>
+            <h5 class="card-title mt-3">View Issues</h5>
+            <p class="card-text">Check the status of reported issues and feature requests.</p>
+            <a href="@Url.Action("AllIssues", "Home")" class="btn btn-success mt-auto">View Issues</a>
+        </div>
+    </div>
+</div>
+
+
+<div class="col-md-4 mb-4">
+    <div class="card h-100 shadow-sm border-secondary">
+        <div class="card-body">
+            <i class="bi bi-info-circle display-1 text-secondary"></i>
+            <h5 class="card-title mt-3">Get local news</h5>
+            <p class="card-text">Stay updated with the latest local news and events.</p>
+            <a href="#" class="btn btn-secondary mt-auto">Learn More</a>
+        </div>
+    </div>
 </div>
