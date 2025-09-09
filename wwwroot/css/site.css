@@ -20,3 +20,17 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+.main-nav {
+    height: 60px;
+}
+
+footer {
+    height: 50px;
+}
+
+.carousel-item,
+.carousel-item img{
+    height: calc(100vh - 60px - 50px);
+    object-fit: cover;
+}

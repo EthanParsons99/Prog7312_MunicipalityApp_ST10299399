@@ -2,47 +2,56 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center mt-5">
-    <h1 class="display-4 mb-4">Welcome</h1>
-    <p class="lead">To AREAS Name website</p>
-</div>
 
+<div id="heroCarousel" class="carousel slide" data-bs-ride="carousel">
 
-    <div class="row text-center mt-5">
-            <div class="col-md-4 mb-4">
-                <div class="card h-100 shadow-sm border-primary">
-                    <div class="card-body">
-                        <i class="bi bi-file-earmark-plus display-1 text-primary"></i> <h5 class="card-title mt-3">Report an Issue</h5>
-                        <p class="card-text">Found a bug or have a feature request? Let us know!</p>
-                        <a href="@Url.Action("ReportIssue", "Home")" class="btn btn-primary mt-auto">Report Issue</a>
-                    </div>
-                </div>
-            </div>
-
-
-
-        <div class="col-md-4 mb-4">
-            <div class="card h-100 shadow-sm border-success">
-                <div class="card-body">
-                    <i class="bi bi-list-check display-1 text-success"></i>
-                    <h5 class="card-title mt-3">View Issues</h5>
-                    <p class="card-text">Check the status of reported issues and feature requests.</p>
-                    <a href="@Url.Action("AllIssues", "Home")" class="btn btn-success mt-auto">View Issues</a>
-                </div>
-            </div>
-        </div>
-
-
-        <div class="col-md-4 mb-4">
-            <div class="card h-100 shadow-sm border-secondary">
-                <div class="card-body">
-                    <i class="bi bi-info-circle display-1 text-secondary"></i>
-                    <h5 class="card-title mt-3">Get local news</h5>
-                    <p class="card-text">Stay updated with the latest local news and events.</p>
-                    <p class="card-text">Feature is a work in progress!!!!</p>
-                    <a href="#" class="btn btn-secondary mt-auto">Learn More</a>
-                </div>
-            </div>
-        </div>
+    <div class="carousel-indicators">
+        <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
     </div>
+
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <img src="/images/vyeboombg.jpg" class="d-block w-100" alt="Slide 1 Image" />
+            <div class="carousel-caption d-none d-md-block">
+                <h5>Welcome to the Municipality App</h5>
+                <p>Report Issues, check status of reports and find out about local events</p>
+                <a href="@Url.Action("ReportIssue", "Home")" class="btn btn-primary mt-auto">Report Issue</a>
+            </div>
+        </div>
+
+
+        <div class="carousel-item">
+            <img src="/images/working.jpg" class="d-block w-100" alt="Slide 2 Image" />
+                <div class="carousel-caption d-none d-md-block">
+                        <h5>View Issues</h5>
+                        <p>Check the status of reported issues and feature requests from the community.</p>
+                        <a href="@Url.Action("AllIssues", "Home")" class="btn btn-success mt-auto">View Issues</a>
+                </div>
+        </div>
+
+
+        <div class="carousel-item">
+            <img src="/images/vyeboombg2.jpg" class="d-block w-100" alt="Slide 2 Image" />
+                <div class="carousel-caption d-none d-md-block">
+                        <h5>Get local news</h5>
+                        <p>Stay updated with the latest local news and events.</p>
+                        <p>Feature is a work in progress!!!!</p>
+                        <a href="#" class="btn btn-secondary mt-auto">Learn More</a>
+                </div>
+        </div>
+
+    </div>
+
+    <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+  
+</div>
 
