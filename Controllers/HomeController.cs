@@ -39,8 +39,6 @@ namespace Prog7312_MunicipalityApp_ST10299399.Controllers
                     issueType = viewModel.issueType,
                     issueDescription = viewModel.issueDescription,
                     issueLocation = viewModel.issueLocation,
-                    //issueStatus = IssueStatus.Reported.ToString(),
-                    //issueDate = DateTime.Now
                 };
 
                 if (viewModel.issueImage != null && viewModel.issueImage.Length > 0)
@@ -61,7 +59,7 @@ namespace Prog7312_MunicipalityApp_ST10299399.Controllers
                 _issueService.ReportNewIssue(issue);
                 TempData["SuccessMessage"] = "Issue reported successfully!";
 
-                return RedirectToAction("Index");
+                return RedirectToAction("AllIssues");
 
             }
             return View(viewModel);
