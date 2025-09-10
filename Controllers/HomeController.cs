@@ -10,7 +10,9 @@ namespace Prog7312_MunicipalityApp_ST10299399.Controllers
     // Handles main application logic
     public class HomeController : Controller
     {
+        // Dependency injection for services
         private readonly IIssueService _issueService;
+        // For handling file uploads
         private readonly IWebHostEnvironment _webHostEnvironment;
 
         public HomeController(IIssueService issueService, IWebHostEnvironment webHostEnvironment)
@@ -29,33 +31,37 @@ namespace Prog7312_MunicipalityApp_ST10299399.Controllers
             return View(new ReportIssueViewModel());
         }
 
+        // Handles issue report submissions
         [HttpPost]
         public IActionResult ReportIssue(ReportIssueViewModel viewModel)
         {
+            // Server-side validation
             if (ModelState.IsValid)
             {
-               var issue = new Issue
+                // Map ViewModel to Model
+                var issue = new Issue
                 {
                     issueType = viewModel.issueType,
                     issueDescription = viewModel.issueDescription,
                     issueLocation = viewModel.issueLocation,
                 };
 
+                // Set default values
                 if (viewModel.issueImage != null && viewModel.issueImage.Length > 0)
                 {
-                   var uniqueFileName = Guid.NewGuid().ToString() + "_" + viewModel.issueImage.FileName;
+                    // Save image to wwwroot/uploads and store path
+                    var uniqueFileName = Guid.NewGuid().ToString() + "_" + viewModel.issueImage.FileName;
                      var uploads = Path.Combine(_webHostEnvironment.WebRootPath, "uploads");
                     var filePath = Path.Combine(uploads, uniqueFileName);
-                    Directory.CreateDirectory(uploads); // Ensure the directory exists
+                    Directory.CreateDirectory(uploads);
 
-
+                    // Save the file
                     using (var fileStream = new FileStream(filePath, FileMode.Create))
                     {
                         viewModel.issueImage.CopyTo(fileStream);
                     }
                     issue.issueImage = "/uploads/" + uniqueFileName;
                 }
-
                 _issueService.ReportNewIssue(issue);
                 TempData["SuccessMessage"] = "Issue reported successfully!";
 
@@ -65,6 +71,7 @@ namespace Prog7312_MunicipalityApp_ST10299399.Controllers
             return View(viewModel);
         }
 
+        // Displays all reported issues
         public IActionResult AllIssues()
         {
             var allIssues = _issueService.GetAllIssues();
